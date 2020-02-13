@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/go/src/app:cached

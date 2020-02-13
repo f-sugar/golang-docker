@@ -1,0 +1,23 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+  - name: app
+    path: .
+    commands:
+      build:
+        status: true
+        method: go build -o bin/main
+      run:
+        status: true
+        method: bin/main
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+      ignored_paths:
+        - .git
+        - .realize
+        - vendor
