@@ -1,14 +1,14 @@
 ## 背景
-- golang (echo) で api サーバーを実装するにあたり開発環境を構築した際のメモ。
- - docker で動かしたい。
- - vscode の remote containers を試したい。
+- Go + echo で api サーバーを実装するにあたり開発環境を構築した際のメモ。
+ - Docker で動かしたい。
+ - VSCode の Remote Containers を試したい。
  - ホットリロード欲しい。
  - ステップ実行したい。
 
 ## ホスト
-- docker 19.03.1
+- Docker 19.03.1
 - docker-compose 1.24.1
-- vscode 1.42.0
+- VSCode 1.42.0
 - ms-vscode-remote.remote-containers 0.101.0
 
 ## コンテナ内
@@ -41,7 +41,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 ```
 - ホットリロード用に realize 、デバッグ用に delve をインストール。
-- その他には vscode 拡張の ms-vscode.go で後にレコメンドされるツール類をイントール。
+- その他には VSCode 拡張の ms-vscode.go で後にレコメンドされるツール類をイントール。
 
 ### docker-compose.yml
 ``` :docker-compose.yml
@@ -56,12 +56,12 @@ services:
     volumes:
       - .:/go/src/app:cached
 ```
-- `command: /bin/sh -c "while sleep 1000; do :; done"` で remote container が立ち上がるまで待機しておく。
+- `command: /bin/sh -c "while sleep 1000; do :; done"` で Remote Container が立ち上がるまで待機しておく。
 
-## remote containers
+## Remote Containers
 ### エクステンションをインストールして起動準備
 - `ms-vscode-remote.remote-containers` を検索してインストール。
-- vscode 左下に以下のアイコンが表示されるのでクリック。
+- VSCode 左下に以下のアイコンが表示されるのでクリック。
 ![1_remote-containers.png](1_remote-containers.png)
 
 - コマンドパレットが開くので `Remote-Containers: Add Development Container Configuration Files...` を選択。
@@ -105,15 +105,15 @@ services:
 }
 ```
 
-### remote container 起動
+### Remote Container 起動
 - 左下のアイコンからコマンドパレットを開いて、 `Remote-Containers: Reopen in Container` を選択。
 ![4_remote-containers.png](4_remote-containers.png)
 
-- コンテナがビルドされて remote container 内に入った状態になる。
+- コンテナがビルドされて Remote Container 内に入った状態になる。
 ![5_remote-containers.png](5_remote-containers.png)
 
 - vscode のターミナルを開くとコンテナ内のワーキングディレクトリ `/go/src/app` が開く。
-- 以降はこの remote container 内で作業していく。
+- 以降はこの Remote Container 内で作業していく。
 
 ## go modules の利用準備
 ```
