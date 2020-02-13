@@ -1,19 +1,19 @@
 {
-	"name": "go",
+  "name": "go",
 
-	"dockerComposeFile": [
-		"../docker-compose.yml"
-	],
+  "dockerComposeFile": [
+	  "../docker-compose.yml"
+  ],
 
-	"service": "app",
-	"workspaceFolder": "/go/src/app",
+  "service": "app",
+  "workspaceFolder": "/go/src/app",
 
-	"settings": { 
+  "settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"go.gopath": "/go"
 	},
 
-	"extensions": [
+  "extensions": [
 		"ms-vscode.go"
 	],
 
