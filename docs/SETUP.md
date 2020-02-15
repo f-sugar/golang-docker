@@ -19,11 +19,12 @@
 
 ## Dockerfile + docker-compose 作成
 ### Dockerfile
-``` :Dockerfile
+``` Dockerfile:Dockerfile
 FROM golang:1.13.7
  
 WORKDIR /go/src/app
 
+ENV GO111MODULE=on
 ENV GOPATH /go
  
 RUN apt-get update \
@@ -44,7 +45,7 @@ RUN apt-get update \
 - その他には VSCode 拡張の ms-vscode.go で後にレコメンドされるツール類をイントール。
 
 ### docker-compose.yml
-``` :docker-compose.yml
+``` docker-compose.yml
 version: '3.7'
 
 services:
@@ -81,7 +82,7 @@ services:
 - `.devcontainer/docker-compose.yml` は使わず、事前に作っておいた docker-compose.yml を使うので削除しておく。
 - `.devcontainer/devcontainer.json` の変更。
 
-``` :.devcontainer/devcontainer.json
+``` .devcontainer/devcontainer.json
 {
 	"name": "go",
 
@@ -123,7 +124,7 @@ $ go mod init
 ## Makefile 作っておく
 - 開発中に色々 make コマンド足していくので、とりあえず作っておく。
 
-``` :Makefile
+``` Makefile
 .PHONY: run
 run:
 	realize start --run
@@ -132,7 +133,7 @@ run:
 ## realize でのホットリロード設定
 - `$ make run` を実行すると .realize.yml が作成されるのでこれを以下のように修正。
 
-``` :.realize.yml
+``` yml:.realize.yml
 settings:
   legacy:
     force: false
@@ -161,7 +162,7 @@ schema:
 ## 動作確認用プログラム
 - echo で Hello, World! を返すだけのやつ。
 
-``` :main.go
+``` main.go
 package main
 
 import (
@@ -208,7 +209,7 @@ Hello, World!
 
 - ホットリロードが効いているのを確認するため以下の変更をして保存。
 
-``` :main.go
+``` main.go
 e.GET("/", func(c echo.Context) error {
 -    return c.String(http.StatusOK, "Hello, World!")
 +    return c.String(http.StatusOK, "Good Bye!")
@@ -227,7 +228,7 @@ Good Bye!
 ## デバッガを起動してステップ実行
 - デバッグ構成ファイルを作成。
 
-``` :.vscode/launch.json
+``` .vscode/launch.json
 {
   "version": "0.2.0",
   "configurations": [
