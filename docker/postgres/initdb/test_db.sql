@@ -1,0 +1,4 @@
+CREATE USER testuser;
+ALTER USER testuser WITH PASSWORD 'testpass';
+CREATE DATABASE testdb ENCODING 'UTF-8';
+GRANT ALL PRIVILEGES ON DATABASE testdb TO testuser;

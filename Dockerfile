@@ -4,6 +4,7 @@ WORKDIR /go/src/app
 
 ENV GO111MODULE=on
 ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
  
 RUN apt-get update \
     && apt-get install -y git \
@@ -15,6 +16,7 @@ RUN apt-get update \
         golang.org/x/tools/gopls@latest \
         golang.org/x/tools/cmd/goimports@latest \
         github.com/ramya-rao-a/go-outline@latest  \
+        github.com/rubenv/sql-migrate/... \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*

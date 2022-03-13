@@ -8,3 +8,26 @@ services:
       - 8080:8080
     volumes:
       - .:/go/src/app:cached
+    env_file: .env
+
+  postgres:
+    build: ./docker/postgres
+    restart: unless-stopped
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./docker/postgres/initdb:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    
+  pgweb:
+    image: sosedoff/pgweb
+    ports:
+      - 5433:8081
+    environment:
+      - DATABASE_URL=${DB_HOST}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable
+    depends_on:
+        - postgres
+
+volumes:
+  pg-data:
+    driver: "local"
